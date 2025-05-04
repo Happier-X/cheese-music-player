@@ -1,8 +1,12 @@
 <template>
   <div
+    data-tauri-drag-region
     class="w-full h-full pl-[15px] pr-[15px] flex items-center justify-between"
   >
-    <div class="w-full h-full flex items-center justify-start">
+    <div
+      class="w-full h-full flex items-center justify-start"
+      data-tauri-drag-region
+    >
       <div class="tooltip tooltip-bottom" data-tip="后退">
         <button
           class="btn btn-sm btn-circle btn-ghost"
@@ -41,7 +45,10 @@
         <input type="search" required placeholder="搜索" />
       </label> -->
     </div>
-    <div class="w-full h-full flex items-center justify-end">
+    <div
+      class="w-full h-full flex items-center justify-end"
+      data-tauri-drag-region
+    >
       <div
         class="tooltip tooltip-bottom"
         :data-tip="isFullScreen ? '退出全屏' : '全屏'"
@@ -96,6 +103,7 @@ import {
 } from "@remixicon/vue";
 import { ref, watch, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 // 路由器对象
 const router = useRouter();
 // 路由对象
@@ -121,46 +129,42 @@ watch(route, () => {
   canGoBack.value = window.history.state?.back !== null;
   canGoForward.value = window.history.state?.forward !== null;
 });
+// 窗口对象
+const appWindow = getCurrentWindow();
 // 是否全屏
 const isFullScreen = ref(false);
 // 是否最大化
 const isMaximized = ref(false);
 onMounted(async () => {
-  isMaximized.value = await window.api.isMaximized();
-  isFullScreen.value = await window.api.isFullScreen();
+  isMaximized.value = await appWindow.isMaximized();
+  isFullScreen.value = await appWindow.isFullscreen();
+  appWindow.onResized(async () => {
+    isMaximized.value = await appWindow.isMaximized();
+  });
 });
 /**
  * 切换全屏
  */
-function handleSwitchFullScreen() {
-  if (isFullScreen.value) {
-    window.api.exitFullScreen();
-  } else {
-    window.api.handleFullScreen();
-  }
+async function handleSwitchFullScreen() {
   isFullScreen.value = !isFullScreen.value;
+  await appWindow.setFullscreen(isFullScreen.value);
 }
 /**
  * 最小化
  */
-function handleMinimize() {
-  window.api.minimizeWindow();
+async function handleMinimize() {
+  await appWindow.minimize();
 }
 /**
  * 切换屏幕大小
  */
-function handleSwitchScreenSize() {
-  if (isMaximized.value) {
-    window.api.unmaximize();
-  } else {
-    window.api.maximize();
-  }
-  isMaximized.value = !isMaximized.value;
+async function handleSwitchScreenSize() {
+  await appWindow.toggleMaximize();
 }
 /**
  * 关闭
  */
-function handleClose() {
-  window.api.closeWindow();
+async function handleClose() {
+  await appWindow.close();
 }
 </script>
