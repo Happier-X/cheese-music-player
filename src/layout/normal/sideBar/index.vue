@@ -1,0 +1,68 @@
+<template>
+  <div class="w-full h-full">
+    <ul class="menu bg-base-200 rounded-box w-full h-full">
+      <li class="py-3 font-bold text-lg text-center mx-1">Cheese Player</li>
+      <li v-for="(item, index) in menuList" :key="index" class="p-1">
+        <RouterLink
+          :to="item.path"
+          :class="{ 'menu-active': activeKey === item.key }"
+        >
+          <component :is="item.icon"></component>
+          {{ item.name }}
+        </RouterLink>
+      </li>
+    </ul>
+  </div>
+</template>
+<script setup lang="ts">
+import {
+  RiAlbumFill as AlbumIcon,
+  RiUserFill as ArtistIcon,
+  RiMusicFill as MusicIcon,
+  RiSettings4Fill as SettingsIcon,
+  RiFileList2Fill as SongListIcon,
+} from "@remixicon/vue";
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+// 菜单列表
+const menuList = [
+  {
+    name: "歌曲",
+    key: "song",
+    path: "/song",
+    icon: MusicIcon,
+  },
+  {
+    name: "专辑",
+    key: "album",
+    path: "/album",
+    icon: AlbumIcon,
+  },
+  {
+    name: "歌手",
+    key: "artist",
+    path: "/artist",
+    icon: ArtistIcon,
+  },
+  {
+    name: "歌单",
+    key: "songList",
+    path: "/songList",
+    icon: SongListIcon,
+  },
+  {
+    name: "设置",
+    key: "setting",
+    path: "/setting",
+    icon: SettingsIcon,
+  },
+];
+// 当前选中的菜单
+const activeKey = ref("song");
+// 路由对象
+const route = useRoute();
+// 监听路由变化，更新选中的菜单
+watch(route, () => {
+  activeKey.value = route.path.split("/")[1];
+});
+</script>

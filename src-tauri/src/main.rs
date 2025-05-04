@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    cheese_music_player_lib::run()
+    cheese_player_lib::run()
 }
