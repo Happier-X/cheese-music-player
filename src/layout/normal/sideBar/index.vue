@@ -1,17 +1,38 @@
 <template>
-  <div class="w-full h-full">
-    <ul class="menu bg-base-200 rounded-box w-full h-full">
-      <li class="py-3 font-bold text-lg text-center mx-1">Cheese Player</li>
-      <li v-for="(item, index) in menuList" :key="index" class="p-1">
+  <div class="w-full h-full flex flex-col items-center justify-between p-3">
+    <div class="flex flex-col items-center justify-center gap-3">
+      <div class="flex items-center justify-center">🧀</div>
+      <div class="flex flex-col items-center justify-center gap-3">
+        <div
+          v-for="(item, index) in mainMenuList"
+          :key="index"
+          class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-primary"
+          :data-tip="item.name"
+        >
+          <RouterLink
+            :to="item.path"
+            :class="{ 'text-primary': activeKey === item.key }"
+          >
+            <component :is="item.icon"></component>
+          </RouterLink>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center justify-center gap-3">
+      <div
+        v-for="(item, index) in bottomMenuList"
+        :key="index"
+        class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-primary"
+        :data-tip="item.name"
+      >
         <RouterLink
           :to="item.path"
-          :class="{ 'menu-active': activeKey === item.key }"
+          :class="{ 'text-primary': activeKey === item.key }"
         >
           <component :is="item.icon"></component>
-          {{ item.name }}
         </RouterLink>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -24,8 +45,8 @@ import {
 } from "@remixicon/vue";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-// 菜单列表
-const menuList = [
+// 主菜单列表
+const mainMenuList = ref([
   {
     name: "歌曲",
     key: "song",
@@ -50,13 +71,16 @@ const menuList = [
     path: "/songList",
     icon: SongListIcon,
   },
+]);
+// 底部菜单列表
+const bottomMenuList = ref([
   {
     name: "设置",
     key: "setting",
     path: "/setting",
     icon: SettingsIcon,
   },
-];
+]);
 // 当前选中的菜单
 const activeKey = ref("song");
 // 路由对象
