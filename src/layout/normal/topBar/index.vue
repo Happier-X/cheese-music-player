@@ -1,7 +1,7 @@
 <template>
   <div
     data-tauri-drag-region
-    class="w-full h-full pl-[15px] pr-[15px] flex items-center justify-between"
+    class="w-full h-full p-3 flex items-center justify-between"
   >
     <div
       class="w-full h-full flex items-center justify-start"
