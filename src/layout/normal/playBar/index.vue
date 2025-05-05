@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full h-full p-2 flex items-center justify-between gap-3">
+  <div
+    class="w-full h-full p-3 flex items-center justify-between gap-3 border-t-black border-t-4"
+  >
     <div class="w-full h-full">
       <!-- <MusicInfo
                 :cover-img="playerStore.currentSongInfo?.coverImg"

@@ -15,6 +15,8 @@
         "title": "cheese-player",
         "width": 1050,
         "height": 690,
+        "minWidth": 1050,
+        "minHeight": 690,
         "decorations": false
       }
     ],

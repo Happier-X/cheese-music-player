@@ -6,12 +6,12 @@
         <div
           v-for="(item, index) in mainMenuList"
           :key="index"
-          class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-primary"
+          class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-neutral"
           :data-tip="item.name"
         >
           <RouterLink
             :to="item.path"
-            :class="{ 'text-primary': activeKey === item.key }"
+            :class="{ 'text-neutral': activeKey === item.key }"
           >
             <component :is="item.icon"></component>
           </RouterLink>
@@ -22,12 +22,12 @@
       <div
         v-for="(item, index) in bottomMenuList"
         :key="index"
-        class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-primary"
+        class="tooltip tooltip-right rounded-box p-1 text-gray-400 hover:text-neutral"
         :data-tip="item.name"
       >
         <RouterLink
           :to="item.path"
-          :class="{ 'text-primary': activeKey === item.key }"
+          :class="{ 'text-neutral': activeKey === item.key }"
         >
           <component :is="item.icon"></component>
         </RouterLink>
