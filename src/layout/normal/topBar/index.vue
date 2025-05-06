@@ -92,13 +92,13 @@ const route = useRoute();
 /**
  * 后退
  */
-function handleBack() {
+const handleBack = () => {
   router.back();
 }
 /**
  * 前进
  */
-function handleForward() {
+const handleForward = () => {
   router.forward();
 }
 // 是否可以后退
@@ -126,26 +126,26 @@ onMounted(async () => {
 /**
  * 切换全屏
  */
-async function handleSwitchFullScreen() {
+const handleSwitchFullScreen = async () => {
   isFullScreen.value = !isFullScreen.value;
   await appWindow.setFullscreen(isFullScreen.value);
 }
 /**
  * 最小化
  */
-async function handleMinimize() {
+const handleMinimize = async () => {
   await appWindow.minimize();
 }
 /**
  * 切换屏幕大小
  */
-async function handleSwitchScreenSize() {
+const handleSwitchScreenSize = async () => {
   await appWindow.toggleMaximize();
 }
 /**
  * 关闭
  */
-async function handleClose() {
+const handleClose = async () => {
   await appWindow.close();
 }
 </script>

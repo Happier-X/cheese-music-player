@@ -28,7 +28,7 @@ import { RiPlayListFill as PlayQueueIcon } from '@remixicon/vue'
 
 const playerStore = {}
 
-function handleShowPlayQueue() {
+const handleShowPlayQueue = () => {
     // console.log(playerStore.playQueue)
 }
 </script>
