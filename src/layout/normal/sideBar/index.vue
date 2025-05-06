@@ -1,7 +1,9 @@
 <template>
   <div class="w-full h-full flex flex-col items-center justify-between p-3">
     <div class="flex flex-col items-center justify-center gap-3">
-      <div class="flex items-center justify-center">🧀</div>
+      <div class="flex items-center justify-center">
+        <img class="select-none" src="../../../assets/logo.png" alt="logo">
+      </div>
       <div class="flex flex-col items-center justify-center gap-3">
         <div
           v-for="(item, index) in mainMenuList"
