@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full px-3">
+  <div class="w-full h-full">
     <div class="w-full h-full">
       <div role="tablist" class="tabs tabs-border">
         <a

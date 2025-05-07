@@ -4,8 +4,8 @@
     data-tauri-drag-region
   >
     <div class="tooltip tooltip-bottom" data-tip="最小化">
-      <button class="btn btn-xs btn-square btn-ghost" @click="handleMinimize">
-        <MinimizeIcon size="16px"></MinimizeIcon>
+      <button class="btn btn-sm btn-circle btn-ghost" @click="handleMinimize">
+        <MinimizeIcon size="20px"></MinimizeIcon>
       </button>
     </div>
     <div
@@ -13,18 +13,18 @@
       :data-tip="isMaximized ? '还原' : '最大化'"
     >
       <button
-        class="btn btn-xs btn-square btn-ghost"
+        class="btn btn-sm btn-circle btn-ghost"
         @click="handleSwitchScreenSize"
       >
         <component
           :is="isMaximized ? UnMaximizeIcon : MaximizeIcon"
-          size="16px"
+          size="20px"
         />
       </button>
     </div>
     <div class="tooltip tooltip-bottom" data-tip="关闭">
-      <button class="btn btn-xs btn-square btn-ghost" @click="handleClose">
-        <CloseIcon size="16px"></CloseIcon>
+      <button class="btn btn-sm btn-circle btn-ghost" @click="handleClose">
+        <CloseIcon size="20px"></CloseIcon>
       </button>
     </div>
   </div>

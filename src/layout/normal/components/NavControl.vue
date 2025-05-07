@@ -5,20 +5,20 @@
   >
     <div class="tooltip tooltip-bottom" data-tip="后退">
       <button
-        class="btn btn-xs btn-square btn-ghost"
+        class="btn btn-sm btn-circle btn-ghost"
         :class="{ 'btn-disabled': !canGoBack }"
         @click="handleBack"
       >
-        <GoBackIcon size="16px"></GoBackIcon>
+        <GoBackIcon size="20px"></GoBackIcon>
       </button>
     </div>
     <div class="tooltip tooltip-bottom" data-tip="前进">
       <button
-        class="btn btn-xs btn-square btn-ghost"
+        class="btn btn-sm btn-circle btn-ghost"
         :class="{ 'btn-disabled': !canGoForward }"
         @click="handleForward"
       >
-        <GoForwardIcon size="16px"></GoForwardIcon>
+        <GoForwardIcon size="20px"></GoForwardIcon>
       </button>
     </div>
   </div>
