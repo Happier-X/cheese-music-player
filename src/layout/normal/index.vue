@@ -4,9 +4,9 @@
       <TopBar></TopBar>
     </div>
     <div class="w-full h-[48px]">
-      <NavBar></NavBar>
+      <MenuBar></MenuBar>
     </div>
-    <div class="w-full h-[calc(100%-187px)]">
+    <div class="w-full h-[calc(100%-171px)]">
       <RouterView v-slot="{ Component }">
         <KeepAlive>
           <component :is="Component"></component>
@@ -20,6 +20,6 @@
 </template>
 <script setup lang="ts">
 import TopBar from "./topBar/index.vue";
-import NavBar from "./navBar/index.vue";
+import MenuBar from "./menBar/index.vue";
 import PlayBar from "./playBar/index.vue";
 </script>
