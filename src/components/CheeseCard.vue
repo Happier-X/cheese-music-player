@@ -8,6 +8,7 @@
 </template>
 <script setup lang="ts">
 defineProps({
+  // 卡片标题
   title: {
     type: String,
     default: "",
