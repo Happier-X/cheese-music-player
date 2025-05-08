@@ -35,7 +35,7 @@
     </fieldset>
     <template #action>
       <button class="btn" @click="handleDialogClose">关闭</button>
-      <button class="btn btn-neutral" @click="visible = false">保存</button>
+      <button class="btn btn-neutral" @click="handleSave">保存</button>
     </template>
   </CheeseDialog>
 </template>
@@ -44,11 +44,25 @@ import CheeseCard from "../../../components/CheeseCard.vue";
 import CheeseDialog from "../../../components/CheeseDialog.vue";
 import { RiEditLine as EditIcon } from "@remixicon/vue";
 import { ref } from "vue";
+import { fetch } from "@tauri-apps/plugin-http";
 
 // 是否展示对话框
 const visible = ref(false);
-// 关闭对话框
+/**
+ * 关闭对话框
+ */
 const handleDialogClose = () => {
   visible.value = false;
+};
+/**
+ * 保存设置
+ */
+const handleSave = async () => {
+  // Send a GET request
+  const response = await fetch("http://jsonplaceholder.typicode.com/posts", {
+    method: "GET",
+  });
+  console.log(response.status); // e.g. 200
+  console.log(response.statusText); // e.g. "OK"
 };
 </script>
