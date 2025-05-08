@@ -7,7 +7,7 @@
         </button>
       </form>
       <h3 class="text-lg font-bold">{{ title }}</h3>
-      <div class="py-4">
+      <div class="pt-6">
         <slot></slot>
       </div>
       <div class="modal-action">
