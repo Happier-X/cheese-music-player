@@ -11,28 +11,37 @@
     </div>
   </CheeseCard>
   <CheeseDialog v-model="visible" title="服务器配置">
-    <fieldset class="fieldset">
-      <label class="floating-label">
-        <span>服务地址</span>
-        <input
-          type="text"
-          class="input input-md w-full"
-          placeholder="服务地址"
-        />
-      </label>
-      <label class="floating-label mt-6">
-        <span>用户名</span>
-        <input type="text" class="input input-md w-full" placeholder="用户名" />
-      </label>
-      <label class="floating-label mt-6">
-        <span>密码</span>
-        <input
-          type="password"
-          class="input input-md w-full"
-          placeholder="密码"
-        />
-      </label>
-    </fieldset>
+    <form action="#">
+      <fieldset class="fieldset">
+        <label class="floating-label">
+          <span>服务地址</span>
+          <input
+            type="text"
+            class="input input-md w-full"
+            v-model="form.mediaLibraryServerUrl"
+            placeholder="服务地址"
+          />
+        </label>
+        <label class="floating-label mt-6">
+          <span>用户名</span>
+          <input
+            type="text"
+            class="input input-md w-full"
+            placeholder="用户名"
+            v-model="form.mediaLibraryServerUsername"
+          />
+        </label>
+        <label class="floating-label mt-6">
+          <span>密码</span>
+          <input
+            type="password"
+            class="input input-md w-full"
+            placeholder="密码"
+            v-model="form.mediaLibraryServerPassword"
+          />
+        </label>
+      </fieldset>
+    </form>
     <template #action>
       <button class="btn" @click="handleDialogClose">关闭</button>
       <button class="btn btn-neutral" @click="handleSave">保存</button>
@@ -43,8 +52,9 @@
 import CheeseCard from "../../../components/CheeseCard.vue";
 import CheeseDialog from "../../../components/CheeseDialog.vue";
 import { RiEditLine as EditIcon } from "@remixicon/vue";
-import { ref } from "vue";
-import { fetch } from "@tauri-apps/plugin-http";
+import { ref, onMounted } from "vue";
+import { Store } from "@tauri-apps/plugin-store";
+import { api } from "../../../api";
 
 // 是否展示对话框
 const visible = ref(false);
@@ -54,15 +64,40 @@ const visible = ref(false);
 const handleDialogClose = () => {
   visible.value = false;
 };
+const form = ref({
+  mediaLibraryServerUrl: "",
+  mediaLibraryServerUsername: "",
+  mediaLibraryServerPassword: "",
+});
+let settingStore = null as Store | null;
+onMounted(async () => {
+  settingStore = await Store.load("store.setting");
+  form.value.mediaLibraryServerUrl =
+    (await settingStore?.get("mediaLibraryServerUrl")) || "";
+  form.value.mediaLibraryServerUsername =
+    (await settingStore?.get("mediaLibraryServerUsername")) || "";
+  form.value.mediaLibraryServerPassword =
+    (await settingStore?.get("mediaLibraryServerPassword")) || "";
+});
 /**
  * 保存设置
  */
 const handleSave = async () => {
-  // Send a GET request
-  const response = await fetch("http://jsonplaceholder.typicode.com/posts", {
-    method: "GET",
-  });
-  console.log(response.status); // e.g. 200
-  console.log(response.statusText); // e.g. "OK"
+  // 设置存储
+  await settingStore?.set(
+    "mediaLibraryServerUrl",
+    form.value.mediaLibraryServerUrl
+  );
+  await settingStore?.set(
+    "mediaLibraryServerUsername",
+    form.value.mediaLibraryServerUsername
+  );
+  await settingStore?.set(
+    "mediaLibraryServerPassword",
+    form.value.mediaLibraryServerPassword
+  );
+  visible.value = false;
+  const res = await api.ping();
+  console.log(1111111111, res);
 };
 </script>

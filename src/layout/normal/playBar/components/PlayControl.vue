@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="w-full h-full flex items-center justify-center gap-3">
     <button
       class="btn btn-sm btn-circle btn-ghost"
@@ -54,4 +54,4 @@ import {
 // import { usePlayerStore } from '@renderer/stores/player'
 // 播放器状态管理
 const playerStore = {};
-</script>
+</script> -->

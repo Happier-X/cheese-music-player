@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="w-full h-full flex items-center justify-end">
         <label
             for="my-drawer"
@@ -31,4 +31,4 @@ const playerStore = {}
 const handleShowPlayQueue = () => {
     // console.log(playerStore.playQueue)
 }
-</script>
+</script> -->
